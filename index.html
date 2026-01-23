@@ -1,154 +1,165 @@
-    <!-- rgb(48, 54, 79) , rgb(172, 186, 196), rgb(225, 217, 188), rgb(240, 240, 219) -->
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <style>
-        body {
-          background-color: rgb(48, 54, 79);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ROCK PAPER SCISSORS</title>
+
+  <style>
+    body {
+      background-color: rgb(48, 54, 79);
+    }
+
+    .header {
+      animation: heading 5s infinite alternate;
+      text-align: center;
+      text-decoration: overline;
+      color: rgb(240, 240, 219);
+    }
+
+    h5 {
+      text-align: center;
+      color: red;
+      background-color: purple;
+    }
+
+    button {
+      background-color: rgb(172, 186, 196);
+    }
+
+    .button-container {
+      text-align: center;
+    }
+
+    .imageAsAbutton {
+      overflow: hidden;
+      background-color: transparent;
+      border-radius: 5px;
+      border: none;
+      height: 230px;
+      width: 170px;
+    }
+
+    @keyframes heading {
+      0% { color: rgb(240, 240, 219); }
+      50% { color: rgb(240, 210, 100); }
+      100% { color: rgb(124, 124, 117); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <h1>ROCK , PAPER , SCISSORS</h1>
+  </div>
+
+  <h5>Select your move</h5>
+
+  <div class="button-container">
+
+    <button class="imageAsAbutton" onclick="resultRPS('rock')">
+      <img src="rock.jpg" alt="ROCK">
+    </button>
+
+    <button class="imageAsAbutton" onclick="resultRPS('paper')">
+      <img src="paper.jpg" alt="PAPER">
+    </button>
+
+    <button class="imageAsAbutton" onclick="resultRPS('scissors')">
+      <img src="scissors.jpg" alt="SCISSORS">
+    </button>
+
+    <br><br>
+
+    <button class="imageAsAbutton" onclick="
+      score.wins = 0;
+      score.loses = 0;
+      score.ties = 0;
+      localStorage.setItem('score', JSON.stringify(score));
+      alert('Score Reset Successfully');
+    ">
+      Reset Score
+    </button>
+
+  </div>
+
+  <script>
+    let score = JSON.parse(localStorage.getItem('score'));
+
+    if (score === null) {
+      score = {
+        wins: 0,
+        loses: 0,
+        ties: 0
+      };
+    }
+
+    function resultRPS(playerMove) {
+      const computerMove = computerRPSmove();
+      let result = '';
+
+      if (playerMove === 'scissors') {
+        if (computerMove === 'ROCK') {
+          result = 'YOU LOSE';
+        } else if (computerMove === 'PAPER') {
+          result = 'YOU WON';
+        } else {
+          result = 'TIE';
         }
+      }
 
-        .header {
-          animation: heading 5s infinite  alternate ;
-          text-align:center;
-          text-decoration:overline;
-          color: rgb(240, 240, 219);
+      else if (playerMove === 'paper') {
+        if (computerMove === 'ROCK') {
+          result = 'YOU WON';
+        } else if (computerMove === 'PAPER') {
+          result = 'TIE';
+        } else {
+          result = 'YOU LOSE';
         }
-        h5 {
-          text-align:center;
-          color:red;
-          background-color:purple;
+      }
+
+      else if (playerMove === 'rock') {
+        if (computerMove === 'ROCK') {
+          result = 'TIE';
+        } else if (computerMove === 'PAPER') {
+          result = 'YOU LOSE';
+        } else {
+          result = 'YOU WON';
         }
-        button {
-          background-color: rgb(172, 186, 196);
-        }
-        .button-container {
-          align-items:center;
-          text-align:center;
-        }
+      }
 
-        .imageAsAbutton {
-          overflow: hidden;
-          background-color:transparent;
-           border-radius:5px;
-           border:none;
-          height:230px;
-          width:170px;
-        }
-        @keyframes heading {
-            0%{color:rgb(240, 240, 219);}
-            50%{color:rgb(240, 210, 100);}
-            100%{color:rgb(124, 124, 117);}}
+      if (result === 'YOU WON') {
+        score.wins += 1;
+      } else if (result === 'YOU LOSE') {
+        score.loses += 1;
+      } else {
+        score.ties += 1;
+      }
 
-      </style>
-    <title>ROCK PAPER SCISSORS</title>
-    </head>
-    <body>
-      <div class="header">
-        <h1> ROCK , PAPER , SCISSORS </h1>
-      </div>
-        <h5> Select your move </h5>
-      
-    <div class="button-container">
-      <button class="imageAsAbutton" onclick="
-       resultRPS('rock');">
-        <img src ="rock.jpg" alt="ROCK">  
-      </button>
+      localStorage.setItem('score', JSON.stringify(score));
 
-      <button class="imageAsAbutton" onclick ="
-        resultRPS('paper');">
-        <img src = "paper.jpg" alt="PAPER">
-      </button>
+      alert(`You chose '${playerMove}' and computer chose '${computerMove}'.
+${result}
 
-      <button class="imageAsAbutton" onclick ="
-        resultRPS('scissors');">
-          <img src ="scissors.jpg" alt="SCISSORS">
-      </button>
-      <button class="imagesAsbutton" onclick ="
-          score.wins = 0;
-          score.loses = 0;
-          score.ties =0 ;
-          localStorage.removeItem('score');
-      ">
-        Reset Score .
-      </button>
-    </div>
-      <script>
-        const score = JSON.parse(localStorage.getItem('score'));
+Wins: ${score.wins}
+Loses: ${score.loses}
+Ties: ${score.ties}`);
+    }
 
-        if (score === null){
-          score = {
-            wins : 0 ,
-            losses : 0 ,
-            ties : 0 ,
-          };
-        }
+    function computerRPSmove() {
+      const randomNumber = Math.random();
+      let computerMove = '';
 
-          function resultRPS(playerMove) {
-            const computerMove = computerRPSmove();
-            let result = '';
+      if (randomNumber < 1 / 3) {
+        computerMove = 'ROCK';
+      } else if (randomNumber < 2 / 3) {
+        computerMove = 'PAPER';
+      } else {
+        computerMove = 'SCISSORS';
+      }
 
-            if (playerMove === 'scissors'){
-              if (computerMove==='ROCK'){
-                result='YOU LOSE';
-              } else if (computerMove==='PAPER') {
-                result='YOU WON';
-              }
-              else if (computerMove==='SCISSORS'){
-                result='TIE';
-              }}
+      return computerMove;
+    }
+  </script>
 
-            else if (playerMove==='paper'){
-              if (computerMove==='ROCK'){
-                result='YOU WON';
-              } else if (computerMove==='PAPER') {
-                result='TIE';
-              }
-              else if (computerMove==='SCISSORS'){
-                result='YOU LOSE';
-               }}
-
-            else if (playerMove==='rock'){
-              if (computerMove==='ROCK'){
-                result='TIE';
-              } else if (computerMove==='PAPER') {
-                result='YOU LOSE';
-              }
-              else if (computerMove==='SCISSORS'){
-                result='YOU WON';
-               }}
-
-               if (result === 'YOU WON'){
-                score.wins += 1 ; 
-               } else if (result === 'YOU LOSE'){
-                score.loses += 1;
-               } else if (result==='TIE'){
-                score.ties += 1;
-               }
-
-               localStorage.setItem('score',JSON.stringify(score));
-
-              alert(`You chose '${playerMove}' and computer chose '${computerMove}' . 
-                        '${result}'
-
-            Wins: ${score.wins} ; loses: ${score.loses} ; Ties:${score.ties}`);
-        };
-         
-        function computerRPSmove () {
-            const randomNumber = Math.random();
-            let computerMove = '';
-            if (randomNumber >=0 &&
-            randomNumber<1/3){
-              computerMove = 'ROCK';}
-            else if (randomNumber >=1/3 &&
-            randomNumber< 2/3){
-              computerMove ='PAPER';
-            }
-            else if (randomNumber >=2/3 &&
-            randomNumber < 1 ) {
-            computerMove ='SCISSORS';
-            }
-          return computerMove ;
-          };
-      </script>
-    </body>
-    </html>
+</body>
+</html>
