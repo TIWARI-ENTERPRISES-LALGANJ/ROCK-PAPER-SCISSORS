@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HANDCRICKET</title>
+  <style>
+        body {
+          background-color: rgb(48, 54, 79);
+        }
+
+        .header {
+          animation: heading 5s infinite  alternate ;
+          text-align:center;
+          text-decoration:overline;
+          color: rgb(240, 240, 219);
+        }
+        h5 {
+          text-align:center;
+          color:red;
+          background-color:purple;
+        }
+        button {
+          background-color: rgb(172, 186, 196);
+        }
+        .button-container {
+          align-items:center;
+          text-align:center;
+        }
+
+        .imageAsAbutton {
+          overflow: hidden;
+          background-color:transparent;
+           border-radius:5px;
+           border:none;
+          height:230px;
+          width:170px;
+        }
+        @keyframes heading {
+            0%{color:rgb(240, 240, 219);}
+            50%{color:rgb(240, 210, 100);}
+            100%{color:rgb(124, 124, 117);}}
+
+      </style>
+</head>
+<body>
+  <div class="header">
+    HAND-CRICKET
+   </div>
+   <div class="button">
+      <button onclick = "
+        ResultHC(1)">
+      1
+      </button>
+      <button onclick = "
+        ResultHC(2)">
+      2
+      </button>
+      <button onclick = "
+        ResultHC(3)">
+      3
+      </button>
+      <button onclick = "
+        ResultHC(4)">
+      4
+      </button>
+      <button onclick = "
+        ResultHC(5)">
+      5
+      </button>
+      <button onclick = "
+        ResultHC(6)">
+      6
+      </button>
+      <button onclick = "
+        ResultHC(10)">
+      10
+      </button>
+      <button onclick = "
+        ResultHC(20)">
+      20
+      </button>
+    </div>
+  </div>
+  <script>
+    let Score = 0;
+    function ResultHC(PlayerMove){
+      const ComputerMove = ComputerMoveHC();
+      let Result = '';
+
+      if (PlayerMove ===1) {
+        if (ComputerMove === 1){
+          Result = 'OUT';
+          console.log(Result);
+          alert (Result);
+          Score = 0;       
+       } else {
+          Score = Score+PlayerMove ; 
+          console.log(Score);
+       }} 
+        else if (PlayerMove ===2) {
+           if (ComputerMove=== 2){
+          Result = 'OUT';
+          console.log(Result);
+          alert (Result);
+          Score= 0;
+        }else{
+          Score = Score+PlayerMove ; 
+          console.log(Score);
+       }}
+         else if (PlayerMove ===3) {
+         if (ComputerMove=== 3){
+          Result = 'OUT';
+          console.log(Result);
+          alert (Result);
+          Score = 0;
+        }else {
+          Score = Score+PlayerMove ; 
+          console.log(Score);
+        }
+        }else if (PlayerMove ===4) {
+        if (ComputerMove=== 4){
+          Result = 'OUT';
+          console.log(Result);
+          alert (Result);
+          Score =0;
+        }else{
+          Score = Score+PlayerMove ; 
+          console.log(Score);
+    }
+  }else if (PlayerMove ===5) {
+     if (ComputerMove=== 5){
+          Result = 'OUT';
+          console.log(Result);
+          alert (Result);
+          Score=0;
+        }else{
+          Score = Score+PlayerMove ; 
+          console.log(Score);
+    }
+  
+  }else if (PlayerMove ===6) {
+        if (ComputerMove=== 6){
+          Result = 'OUT';
+          console.log(Result);
+          alert (Result);
+          Score=0;
+        }else{
+          Score = Score+PlayerMove ; 
+          console.log(Score);
+    }
+  
+  }else if (PlayerMove ===10) {
+        if (ComputerMove=== 10){
+          Result = 'OUT';
+          console.log(Result);
+          alert (Result);
+          Score=0;
+        }else{
+          Score = Score+PlayerMove ; 
+          console.log(Score);
+    }
+  }else if (PlayerMove ===20) {
+         
+       if (ComputerMove=== 20){
+          Result = 'OUT';
+          console.log(Result);
+          alert (Result);
+          Score=0;
+        }else{
+          Score = Score+PlayerMove ; 
+          console.log(Score);
+    }
+  }
+};
+
+  function ComputerScoreHC(){
+    const ComuterScoreRandom = Math.random();
+    let ComputerScore = '';
+    if (ComputerScoreRandom < 0.001){
+      ComputerScore = 10 ;
+      console.log(ComputerScore);
+}};
+
+    function ComputerMoveHC () {
+    const ComputerNumMove = Math.random();
+    let ComputerMove = '';
+    if (ComputerNumMove < 0.125){
+      ComputerMove = 1 ;
+      console.log(ComputerMove);
+    } else if (ComputerNumMove < 0.250){
+      ComputerMove = 2 ;
+      console.log(ComputerMove);
+    } else if (ComputerNumMove < 0.375){
+      ComputerMove = 3 ;
+      console.log(ComputerMove);
+    } else if (ComputerNumMove < 0.500){
+      ComputerMove = 4 ;
+      console.log(ComputerMove);
+    } else if (ComputerNumMove < 0.625){
+      ComputerMove = 5;
+      console.log(ComputerMove);
+    }else if (ComputerNumMove < 0.750){
+      ComputerMove = 6 ;
+      console.log(ComputerMove);
+    }else if (ComputerNumMove < 0.875){
+      ComputerMove = 10 ;
+      console.log(ComputerMove);
+    } else {
+      ComputerMove = 20 ;
+      console.log(ComputerMove);
+    }
+    return ComputerMove;
+  };
+
+  </script>
+</body>
+</html>

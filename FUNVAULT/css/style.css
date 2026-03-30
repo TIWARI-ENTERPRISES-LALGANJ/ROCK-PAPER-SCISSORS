@@ -1,0 +1,107 @@
+.ANNA {
+  font-weight:bold;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 120px;
+  background: rgb(70, 0, 155);
+  animation: webstart 1.5s ease-out forwards;
+}
+.pageContent {
+  
+  opacity:0;
+  animation:pagestart 1s ease forwards;
+  animation-delay: 1.5s;
+ }
+ body {
+  background:radial-gradient(circle at center, rgb(70,0,162),rgba(34, 0, 78, 0.66));}
+.Head{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  background:linear-gradient(to right , rgb(2, 84, 191) , rgb(0, 47, 109));
+   border-radius:20px;
+   font-size:25px;
+}
+.page{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 50px 50px 50px;
+}
+.navbar{
+  position:fixed;
+  display:flex;
+  flex-direction:column;
+  top:50%;
+  right:20px;
+}
+.navbar{
+  background-color:rgb(0,110,255);
+}
+.FirstHeadLetter{
+  animation : HeadColor1 2s infinite alternate;
+}
+#SecondHeadLetter {
+  animation : HeadColor2 2s infinite alternate ;
+}
+h3{
+  color:rgb(186, 186, 186);
+  text-align:center;
+  font-size:23px;
+  border-radius:20px;
+  border: 1px solid rgba(255, 255, 255, 0.002);
+  transition : border-color,transform .5s ease ;
+}
+h3:hover{
+  border-color: skyblue;
+  transform:scale(0.9);
+}
+.image1{
+  height:40%;
+  width:130%;
+  border-radius:20px;
+  border:2px solid rgb(0, 228, 235);
+}
+.image2{
+  height:40%;
+  width:130%;
+  border-radius:20px;
+  border:2px solid rgb(0, 228, 235);
+}
+.game{
+  margin:60px;
+}
+a:link , a:visited {
+  color:white;
+}
+.Container{
+display:grid;
+grid-template-columns : auto auto;
+justify-content:center;
+}
+.item1{
+  text-align:center;
+}
+.item2{
+  text-align:center;
+}
+@keyframes webstart {
+
+  40% {opacity: 1; transform: scale(1);}
+  100% {opacity: 0; transform: scale(0.4);}
+}
+
+@keyframes pagestart {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+@keyframes HeadColor1 {
+  0% {color:rgb(10, 20, 60)}
+  100% {color:rgb(237, 236, 236)}
+}
+@keyframes HeadColor2 {
+  0% {color:white}
+  100%{color:rgb(10,20,60)}
+}

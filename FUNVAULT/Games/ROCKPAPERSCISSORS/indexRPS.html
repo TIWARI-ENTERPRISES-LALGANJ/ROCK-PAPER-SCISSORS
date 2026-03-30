@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    body {
+    background:radial-gradient(circle at center, rgb(70,0,162),rgba(34, 0, 78, 0.66));}
+
+    h1 {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      background:linear-gradient(to right , rgb(2, 84, 191) , rgb(0, 47, 109));
+      border-radius:20px;
+      font-size:25px;
+    }
+    
+
+    h5{
+      color:rgb(186, 186, 186);
+      text-align:center;
+      font-size:23px;
+      border-radius:20px;
+      border: 1px solid rgba(255, 255, 255, 0.002);
+      transition : border-color,transform .5s ease ;
+    }
+    h5:hover{
+      border-color: skyblue;
+      transform:scale(0.9);
+    }
+    button {
+      background-color: rgb(172, 186, 196);
+    }
+
+    .button-container {
+      text-align: center;
+    }
+
+    .imageAsAbutton {
+      overflow: hidden;
+      background-color: transparent;
+      border-radius: 5px;
+      border: none;
+      height: 230px;
+      width: 170px;
+    }
+
+    .imageAsAbutton img {
+      width: 100%;
+      height: 100%;
+    }
+    .paperImageMove img {
+      width: 100%;
+      height: 70%;
+    }
+    @keyframes heading {
+      0% { color: rgb(240, 240, 219); }
+      50% { color: rgb(240, 210, 100); }
+      100% { color: rgb(124, 124, 117); }
+    }
+  </style>
+
+  <title>ROCK PAPER SCISSORS</title>
+</head>
+
+<body>
+  <div class="header">
+    <h1>ROCK, PAPER, SCISSORS</h1>
+  </div>
+
+  <h5>Select your move</h5>
+
+  <div class="button-container">
+    <button class="imageAsAbutton" onclick="resultRPS('rock')">
+      <img src="images/rock.png">
+    </button>
+
+    <button class="imageAsAbutton paperImageMove" onclick="resultRPS('paper')">
+      <img src="images/paper.png">
+    </button>
+
+    <button class="imageAsAbutton" onclick="resultRPS('scissors')">
+      <img src="images/scissors.png">
+    </button>
+
+    <br><br>
+
+    <button onclick="resetScore()">Reset Score</button>
+  </div>
+  <p ><span style="color: rgb(0, 200, 255);">Your Move : </span><span id="playerMove" style="color: rgb(250, 250, 255);"> </span></p>
+    <p style="color: rgb(255, 80, 120);"><span>Computer Move : </span><span id="computerMove" style="color: rgb(250, 250, 255);"> </span></p>
+<p id="result"></p>
+  <table>
+    <tr>
+      <th id="Wins">Wins</th>
+      <th id="Losses">Losses</th>
+      <th id="ties">ties</th>
+    </tr>
+    <tr>
+      <td id="ScoreWins"> </td>
+      <td id="ScoreLosses"> </td>
+      <td id="ScoreTies"> </td>
+    </tr>
+  </table>
+
+  <script>
+    let score = JSON.parse(localStorage.getItem('score'));
+
+    if (score === null) {
+      score = {
+        wins: 0,
+        losses: 0,
+        ties: 0
+      };
+    }
+
+    function resultRPS(playerMove) {
+      const computerMove = computerRPSmove();
+      let result = '';
+
+      if (playerMove === 'scissors') {
+        if (computerMove === 'ROCK') result = 'YOU LOSE';
+        else if (computerMove === 'PAPER') result = 'YOU WON';
+        else result = 'TIE';
+      }
+
+      else if (playerMove === 'paper') {
+        if (computerMove === 'ROCK') result = 'YOU WON';
+        else if (computerMove === 'PAPER') result = 'TIE';
+        else result = 'YOU LOSE';
+      }
+
+      else if (playerMove === 'rock') {
+        if (computerMove === 'ROCK') result = 'TIE';
+        else if (computerMove === 'PAPER') result = 'YOU LOSE';
+        else result = 'YOU WON';
+      }
+
+      if (result === 'YOU WON') {
+        score.wins++;
+      } else if (result === 'YOU LOSE') {
+        score.losses++;
+      } else {
+        score.ties++;
+      }
+
+      localStorage.setItem('score', JSON.stringify(score));
+
+let ResultElement = document.getElementById("result");
+ResultElement.innerText = result;
+if (result === 'YOU WON') {
+  ResultElement.style.color = "rgb(0,255,100)";
+}
+else if (result === 'YOU LOSE') {
+  ResultElement.style.color = "rgb(255,0,0)";
+}
+else {
+  ResultElement.style.color = "rgb(255,200,0)";
+}
+
+
+let ScoreWinsPrint = document.getElementById("ScoreWins")
+ScoreWinsPrint.innerText = score.wins;
+
+let ScoreLossesPrint = document.getElementById("ScoreLosses")
+ScoreLossesPrint.innerText = score.losses;
+
+let ScoreTiesPrint = document.getElementById("ScoreTies")
+ScoreTiesPrint.innerText = score.ties;
+
+let playerMoveElement = document.getElementById("playerMove");
+playerMoveElement.innerText = playerMove ;
+
+let computerMoveElement = document.getElementById("computerMove");
+computerMoveElement.innerText = computerMove ;
+return playerMove;
+};
+
+ 
+    function computerRPSmove() {
+        const randomNumber = Math.random();
+
+        if (randomNumber < 1 / 3) return 'ROCK';
+        else if (randomNumber < 2 / 3) return 'PAPER';
+        else return 'SCISSORS';
+    }
+    function resetScore() {
+      score = { wins: 0, losses: 0, ties: 0 };
+      localStorage.removeItem('score');
+      alert('Score reset!');
+    }
+  </script>
+
+</body>
+</html>
